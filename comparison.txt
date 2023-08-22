@@ -1,0 +1,26 @@
+Non-Concurrent Version (Single-Threaded):
+
+In the non-concurrent version, the simulation is sequential. It simulates each time slot (30 seconds) one after the other.
+The program progresses to the next time slot only after completing the calculations for the current slot.
+All calculations for each time slot are done in a single thread.
+Concurrent Version (Cooperative Multitasking):
+
+In the concurrent version, the simulation is still effectively single-threaded, but it uses a cooperative multitasking approach.
+The program divides the time into intervals (each 30 seconds) and performs calculations for each interval sequentially.
+However, it does not wait for calculations of one interval to finish before moving to the next interval. Instead, it calculates the values for each interval successively.
+This approach simulates concurrent activities within a single thread by breaking down the simulation into small intervals.
+Observations:
+
+Concurrency: The concurrent version achieves a form of concurrency through cooperative multitasking, where different activities are simulated for different intervals, even though they are still executed sequentially within the same thread. The non-concurrent version does not exhibit this form of concurrency.
+
+Blocking: In the non-concurrent version, the program blocks until the calculations for the current time slot are complete before moving to the next slot. In the concurrent version, the program doesn't block and progresses to the next time interval without waiting for the calculations of the current interval to finish.
+
+Interaction: The non-concurrent version is easier to follow and understand, as it follows a straightforward sequential logic. The concurrent version introduces the concept of intervals and requires managing multiple arrays to store results for each interval, making it more complex.
+
+Performance: The concurrent version may have slightly better responsiveness in terms of showing partial results for each interval sooner, even though it's still running in a single thread. However, due to the cooperative nature, it may not be as efficient as true multithreading in utilizing modern multi-core processors.
+
+Synchronization: Both versions avoid explicit synchronization because they are single-threaded. However, the concurrent version may still have some coordination overhead due to managing multiple arrays and interval-based calculations.
+
+User Experience: Both versions provide similar outputs, but the concurrent version might make it feel like there's some parallelism occurring due to the intermittent display of interval results.
+
+In summary, the concurrent version achieves a kind of pseudo-concurrency by dividing the simulation into intervals and simulating activities sequentially within those intervals. However, it's important to note that true parallelism and the benefits of utilizing multiple cores can only be achieved through multithreading or parallel programming techniques, which are not employed in either of these versions.
